@@ -4,10 +4,6 @@ title: You're up and running!
 published: true
 ---
 
-Next you can update your site name, avatar and other options using the _config.yml file in the root of your repository (shown below).
-
-![_config.yml]({{ site.baseurl }}/images/config.png)
-
 This site documents the code of **Diaclone**, a set of experiments in training Transformer networks to perform error-detection and error-correction tasks on monophonic symbolic music.
 
 All editable parameters for both training and testing are controlled by `transformer_params.py`. A single set of parameters fully defines a train/test experiment, so that different parameter files can be swapped out to perform different experiments.
