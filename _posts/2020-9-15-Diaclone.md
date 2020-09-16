@@ -4,13 +4,20 @@ title: You're up and running!
 published: true
 ---
 
-This site documents the code of **Diaclone**, a set of experiments in training Transformer networks to perform error-detection and error-correction tasks on monophonic symbolic music.
+This site documents the code of **Diaclone**, a set of experiments in training transformer networks to perform error-detection and error-correction tasks on monophonic symbolic music.
 
 All editable parameters for both training and testing are controlled by `transformer_params.py`. A single set of parameters fully defines a train/test experiment, so that different parameter files can be swapped out to perform different experiments.
 
 ## Model Architecture
 
-The main model is described in `transformer_full_seq_model.py`. It is a
+The main model is described in `transformer_full_seq_model.py`. It is a fairly minimal wrapper around [the PyTorch default "all-in-one" transformer module](https://pytorch.org/docs/stable/generated/torch.nn.Transformer.html). The inputs and targets are both passed through their own one-layer feed-forward networks before entering the transformer, and the transformer's output is passed through another one-layer network to return it to the size of the input embedding. For further information about the inner workings of an encoder-decoder transformer sequence model, refer to [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/).
+
+The dimensionality of the input must be specified upon creation of the model (in the argument `num_feats`, but the number of features can depend on the specific dataset used (e.g. when using the runlength encoding that requires gathering statistics on the dataset before training).
+
+Relevant Parameters:
+`ninp`: Dimension of the transformer's attention mechanism.
+`nhid`: Dimension of each transformer encoder/decoder's feed-forward layer.
+`nlayers`: Number of encoder/decoder layers in the transformer.
 
 
 ### Masking
