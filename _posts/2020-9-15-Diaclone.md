@@ -48,6 +48,8 @@ Symbolic music must be processed from `.krn` or `.midi` files into a `.hdf5` fil
 Relevant parameters:
 
 - `raw_data_paths`: A dictionary linking corpus names to directories.
+- `validate_proportion`: Amount of dataset to use for validation (spread evenly across all corpora).
+- `validate_proportion`: Amount of dataset to use for validation (spread evenly across all corpora).
 - `beat_multiplier`: All durations and onset times are multiplied by this number and then rounded to the nearest integer.
 
 ### Run-Length
