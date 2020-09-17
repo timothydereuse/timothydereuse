@@ -8,6 +8,12 @@ This site documents the code of **Diaclone**, a set of experiments in training t
 
 All editable parameters for both training and testing are controlled by `transformer_params.py`. A single set of parameters fully defines a train/test experiment, so that different parameter files can be swapped out to perform different experiments.
 
+A quick summary of the process to train a new model:
+
+1. Set data paths, architecture, hyperparameters in `transformer_params.py`.
+2. Run `data_management/make_hdf5.py` to make an `.hdf5` file out of the training data (this only needs to be done once per dataset).
+3. Run `transformer_errors_train.py`.
+
 ## Model Architecture
 
 The main model is described in `transformer_full_seq_model.py`. It is a fairly minimal wrapper around [the PyTorch default "all-in-one" transformer module](https://pytorch.org/docs/stable/generated/torch.nn.Transformer.html). The inputs and targets are both passed through their own one-layer feed-forward networks before entering the transformer, and the transformer's output is passed through another one-layer network to return it to the size of the input embedding. The positional encoding mechanism used is identical to the one found in the PyTorch examples. For further information about the inner workings of an encoder-decoder transformer sequence model, refer to [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/).
