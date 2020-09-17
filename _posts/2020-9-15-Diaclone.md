@@ -32,7 +32,12 @@ Two distinct types of masking are used in this Transformer implementation; memor
 
 Memory masking is used to prevent elements at certain positions in a sequence from attending to elements at other positions; for the source sequences, this is a matrix of shape (S, S) and for the targets it is a matrix of shape (T, T). The archetypal example of this is the "square subsequent mask," which looks a little like a descending staircase; it prevents any sequence element from attending to elements that come subsequent to it, and is used in tasks where the goal is to predict future members of a sequence given past values. For our purposes, we want to prevent elements from attending to their own past states (since the goal is to reconstruct every element from context) so we use point-masks instead. See the `make_point_mask` method inside the `TransformerModel` class.
 
+![pointmask.png]({{site.baseurl}}/_posts/pointmask.png) ![Subsequentmask.png]({{site.baseurl}}/_posts/Subsequentmask.png)
+
 Padding masks are used to prevent sequence elements from attending to padding elements that have been concatenated onto the end or beginning of a sequence to bring it up to the necessary length for a batch. Since different sequences in a single batch can have different amounts of padding, these are generated per-batch, on the fly. See the `make_len_mask` method inside the `TransformerModel` class.
+
+![An example of a padding mask.]({{site.baseurl}}/_posts/paddingmask.png)
+
 
 ## Data Preparation
 
