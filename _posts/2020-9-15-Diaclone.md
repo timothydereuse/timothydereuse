@@ -21,10 +21,11 @@ The main model is described in `transformer_full_seq_model.py`. It is a fairly m
 The dimensionality of the input must be specified upon creation of the model (in the argument `num_feats`, but the number of features can depend on the specific dataset used (e.g. when using the runlength encoding that requires gathering statistics on the dataset before training).
 
 Relevant Parameters:
-`ninp`: Dimension of the transformer's attention mechanism.
-`nhid`: Dimension of each transformer encoder/decoder's feed-forward layer.
-`nlayers`: Number of encoder/decoder layers in the transformer.
-`dropout`: Dropout probability.
+- `ninp`: Dimension of the transformer's attention mechanism.
+- `nhid`: Dimension of each transformer encoder/decoder's feed-forward layer.
+- `nlayers`: Number of encoder/decoder layers in the transformer.
+- `dropout`: Dropout probability.
+
 
 ### Masking
 
@@ -41,14 +42,13 @@ Padding masks are used to prevent sequence elements from attending to padding el
 
 ## Data Preparation
 
-Symbolic music must be processed from `.krn` or `.midi` files into a `.hdf5` file for training. This processing is done by the `data_management/make_hdf5.py` script.  The resulting `.hdf5` file will contain each file of the input indexed as a two-dimensional array of integers under the path `corpus_name/file_name.` The columns of each entry contain `(MIDI Pitch, Onset time, Duration)` for each note.
+Symbolic music must be processed from `.krn` or `.midi` files into a `.hdf5` file for training. This processing is done by the `data_management/make_hdf5.py` script.  The resulting `.hdf5` file will contain each file of the input indexed as a two-dimensional array of integers under the path `corpus_name/file_name.` The columns of each entry contain `(MIDI Pitch, Onset time, Duration)` for each note. This intermediate representation is transformed into trainable representations on the fly during training.
+
 
 Relevant parameters:
 
-`raw_data_paths`: A dictionary linking corpus names to directories.
-`beat_multiplier`: All durations and onset times are multiplied by this number and then rounded to the nearest integer.
-
-This intermediate representation is transformed into trainable representations on the fly.
+- `raw_data_paths`: A dictionary linking corpus names to directories.
+- `beat_multiplier`: All durations and onset times are multiplied by this number and then rounded to the nearest integer.
 
 ### Run-Length
 For this representation, each note comprises two one-hot vectors concatenated together: one for pitch, and one for duration. The pitch vector is simple enough, since only so many MIDI pitch values are typically used, so we can represent that as we would any categorical data. Duration is more tricky; a huge number of note durations are possible but only a fraction of the possible durations are common. So, in `get_tick_deltas_for_runlength()`, we find out what the most common note durations are throughout the dataset, and one-hot encode to those (the number of durations used is set in the parameters file as `num_dur_vals`). Any duration that is not in the `num_dur_vals` most common durations is rounded to the nearest common duration. The function `arr_to_mono_runlength()` creates the one-hot vectors for each note, and concatenate pitch and duration together.
