@@ -26,13 +26,15 @@ Relevant parameters:
 - `beat_multiplier`: All durations and onset times are multiplied by this number and then rounded to the nearest integer.
 
 ### Run-Length
-For this representation, each note comprises two one-hot vectors concatenated together: one for pitch, and one for duration. The pitch vector is simple enough, since only so many MIDI pitch values are typically used, so we can represent that as we would any categorical data. Duration is more tricky; a huge number of note durations are possible but only a fraction of the possible durations are common. So, in `get_tick_deltas_for_runlength()`, we find out what the most common note durations are throughout the dataset, and one-hot encode to those (the number of durations used is set in the parameters file as `num_dur_vals`). Any duration that is not in the `num_dur_vals` most common durations is rounded to the nearest common duration. The function `arr_to_mono_runlength()` creates the one-hot vectors for each input, and concatenates pitch and duration together.
+For this representation, each note comprises two one-hot vectors concatenated together: one for pitch, and one for duration. The pitch vector is simple enough, since only so many MIDI pitch values are typically used, so we can represent that as we would any categorical data. Duration is more tricky; a huge number of note durations are possible but only a fraction of the possible durations are common. So, in `get_tick_deltas_for_runlength()`, we find out what the most common note durations are throughout the dataset, and one-hot encode to those (the number of durations used is set in the parameters file as `num_dur_vals`). Any duration that is not in the `num_dur_vals` most common durations is rounded to the nearest common duration. The function `arr_to_mono_runlength()` creates the one-hot vectors for each input, and concatenates pitch and duration together. There is a single feature concatenated on to the end of this representation a 'rest' event.
 
-So, the runlength
+So, the runlength representation will have a total length of: 
+
+`(highest_MIDI_pitch_in_dataset - lowest_MIDI_pitch_in_dataset) + 1 + num_dur_vals`
 
 Relevant parameters:
 
-- `num_dur_vals`: A dictionary linking corpus names to directories.
+- `num_dur_vals`: The number of most common duration values to return when collecting statistics. If this is larger than the number of total unique duration values found in the corpus, then some features in the resulting representation will always be 0 (a warning will be displayed if this is the case). For reference, the total number of unique duration values in the Essens and Meertens tune collections is 21.
 
 ### Note-Tuple
 The Note-Tuple is a MIDI-like representation of symbolic music, where each note is represented as an ordered 4-tuple of the form `(MIDI pitch, voice, delta from previous event, duration)`.
