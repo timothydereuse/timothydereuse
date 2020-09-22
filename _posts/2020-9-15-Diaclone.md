@@ -32,7 +32,7 @@ So, the runlength
 
 Relevant parameters:
 
-- `raw_data_paths`: A dictionary linking corpus names to directories.
+- `num_dur_vals`: A dictionary linking corpus names to directories.
 
 ### Note-Tuple
 The Note-Tuple is a MIDI-like representation of symbolic music, where each note is represented as an ordered 4-tuple of the form `(MIDI pitch, voice, delta from previous event, duration)`.
