@@ -28,6 +28,12 @@ Relevant parameters:
 ### Run-Length
 For this representation, each note comprises two one-hot vectors concatenated together: one for pitch, and one for duration. The pitch vector is simple enough, since only so many MIDI pitch values are typically used, so we can represent that as we would any categorical data. Duration is more tricky; a huge number of note durations are possible but only a fraction of the possible durations are common. So, in `get_tick_deltas_for_runlength()`, we find out what the most common note durations are throughout the dataset, and one-hot encode to those (the number of durations used is set in the parameters file as `num_dur_vals`). Any duration that is not in the `num_dur_vals` most common durations is rounded to the nearest common duration. The function `arr_to_mono_runlength()` creates the one-hot vectors for each input, and concatenates pitch and duration together.
 
+So, the runlength
+
+Relevant parameters:
+
+- `raw_data_paths`: A dictionary linking corpus names to directories.
+
 ### Note-Tuple
 The Note-Tuple is a MIDI-like representation of symbolic music, where each note is represented as an ordered 4-tuple of the form `(MIDI pitch, voice, delta from previous event, duration)`.
 
@@ -56,5 +62,3 @@ Memory masking is used to prevent elements at certain positions in a sequence fr
 Padding masks are used to prevent sequence elements from attending to padding elements that have been concatenated onto the end or beginning of a sequence to bring it up to the necessary length for a batch. Since different sequences in a single batch can have different amounts of padding, these are generated per-batch, on the fly. See the `make_len_mask` method inside the `TransformerModel` class.
 
 ![An example of a padding mask.](https://raw.githubusercontent.com/timothydereuse/timothydereuse.github.io/master/_posts/paddingmask.png)
-
-
