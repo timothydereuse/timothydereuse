@@ -19,7 +19,7 @@ My research interests center around pattern discovery and error detection in sym
 
 I write regularly for the pop music review site [The Singles Jukebox](http://www.thesinglesjukebox.com/).
 
-I'm a lifelong guitar player. Most of my music is released and performed under the band name Water Gun Water Gun Sky Attack (partial discography on [bandcamp](https://watergunsky.bandcamp.com/) | [spotify](https://open.spotify.com/artist/3KstYJyLtTmsxAPLkkEDt8)). My current project is figuring out how I can delegate this "songwriting" business to an elaborate neural network, which would save me a lot of time.
+I'm a lifelong guitar player. Most of my music is released and performed under the band name Water Gun Water Gun Sky Attack (partial discography on [bandcamp](https://watergunsky.bandcamp.com/) / [spotify](https://open.spotify.com/artist/3KstYJyLtTmsxAPLkkEDt8)). My current project is figuring out how I can delegate this "songwriting" business to an elaborate neural network, which would save me a lot of time.
 
 ### Publications
 
