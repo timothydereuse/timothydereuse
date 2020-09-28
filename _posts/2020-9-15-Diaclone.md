@@ -47,18 +47,19 @@ The Note-Tuple is a MIDI-like representation of symbolic music, where each note 
 
 ## Model Architecture
 
-There are two possible models: A bidirectional _transformer encoder_, and a  _transformer encoder-decoder_.
+There are two possible models, both taking the same parameters: A bidirectional _transformer encoder_, and a  _transformer encoder-decoder_.
 
-The transformer encoder is modelled after the architecture used in [the well-known BERT language model.](https://arxiv.org/abs/1810.04805). It consists of a stack of transformer encoders with two feed-forward layers at the beginning and end, to transform the data to and from the size speci	
+The transformer encoder is modelled after the architecture used in [the well-known BERT language model.](https://arxiv.org/abs/1810.04805). It consists of a stack of transformer encoders with two feed-forward layers at the beginning and end. The positional encoding mechanism used is identical to the one found in the PyTorch examples. Because it has no decoder, this model can only produce output sequences of the exact same length as its inputs.
 
-The encoder-decoder is described in `transformer_full_seq_model.py`. It is a fairly minimal wrapper around [the PyTorch default "all-in-one" transformer module](https://pytorch.org/docs/stable/generated/torch.nn.Transformer.html). The inputs and targets are both passed through their own one-layer feed-forward networks before entering the transformer, and the transformer's output is passed through another one-layer network to return it to the size of the input embedding. The positional encoding mechanism used is identical to the one found in the PyTorch examples. For further information about the inner workings of an encoder-decoder transformer sequence model, refer to [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/).
+The encoder-decoder is described in `transformer_full_seq_model.py`. It is a fairly minimal wrapper around [the PyTorch default "all-in-one" transformer module](https://pytorch.org/docs/stable/generated/torch.nn.Transformer.html). The inputs and targets are both passed through their own one-layer feed-forward networks before entering the transformer, and the transformer's output is passed through another one-layer network to return it to the size of the input embedding. The positional encoding mechanism used is again identical to the one found in the PyTorch examples. For further information about the inner workings of an encoder-decoder transformer sequence model, refer to [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/).
 
-The dimensionality of the input must be specified upon creation of the model (in the argument `num_feats`, but the number of features can depends on the specific dataset and encoding type used (e.g. when using the runlength encoding that requires gathering statistics on the dataset before training).
+The dimensionality of the input must be specified upon creation of the model (in the argument `num_feats`, but the number of features depends on the specific dataset and encoding type used (e.g. when using the runlength encoding that requires gathering statistics on the dataset before training).
 
 Relevant Parameters:
 - `d_model`: Dimension of the transformer's attention mechanism.
 - `hidden`: Dimension of each transformer encoder/decoder's feed-forward layer.
 - `nlayers`: Number of encoder/decoder layers in the transformer.
+- `nhead`: Number of attention heads (`d_model` must be divisible by this number).
 - `dropout`: Dropout probability.
 
 
