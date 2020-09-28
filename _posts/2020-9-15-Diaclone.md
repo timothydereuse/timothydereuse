@@ -26,17 +26,15 @@ Relevant parameters:
 - `beat_multiplier`: All durations and onset times are multiplied by this number and then rounded to the nearest integer.
 
 ### Run-Length
-For this representation, each note comprises two one-hot vectors concatenated together: one for pitch, and one for duration. The pitch vector is simple enough, since only so many MIDI pitch values are typically used, so we can represent that as we would any categorical data. We add an extra feature to represent rest events.
+For this representation, each note comprises two one-hot vectors concatenated together: one for pitch, and one for duration. The pitch vector is simple enough, since we can represent it as we would any categorical data. We add an extra feature to represent rest events.
 
-Duration is more tricky; a huge number of note durations are possible but only a fraction of the possible durations are common. So, in `get_tick_deltas_for_runlength()`, we find out what the most common note durations are throughout the dataset, and one-hot encode to those (the number of durations used is set in the parameters file as `num_dur_vals`). Any duration that is not in the `num_dur_vals` most common durations is rounded to the nearest common duration. To this 
-
-
+Duration is more tricky; a huge number of note durations are possible but only a fraction of the possible durations are actually used. So, in `get_tick_deltas_for_runlength()`, we find out what the most common note durations are throughout the dataset, and one-hot encode to those (the number of durations used is set in the parameters file as `num_dur_vals`). Any duration that is not in the `num_dur_vals` most common durations is rounded to the nearest common duration. We also concatenate four additional features (defined in `params.FLAGS`) to represent beginnings and endings of songs, masked elements, and padded elements.
 
 The function `arr_to_mono_runlength()` creates the one-hot vectors for each input, and concatenates pitch and duration together. 
 
 So, the runlength representation will have a total length of: 
 
-`(highest_MIDI_pitch_in_dataset - lowest_MIDI_pitch_in_dataset) + 1 + num_dur_vals`
+`pitch_range_of_dataset + 1 + num_dur_vals + len(FLAGS)`
 
 Relevant parameters:
 
