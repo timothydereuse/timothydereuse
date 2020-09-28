@@ -7,7 +7,7 @@ published: true
 
 I'm Tim de Reuse, a PhD candidate in Music Technology at McGill University in Montreal, Canada.
 
-My research interests center around pattern discovery and error detection in symbolic music. For my doctoral project, I'm using machine learning to perform error detection and correction on popular music by leveraging information on long-term musical repetition. I've also worked on Optical Music Recognition as part of the [SIMSSA project](https://simssa.ca/).
+My research interests center around pattern discovery and error detection in symbolic music. For my doctoral project, I'm using machine learning to perform error detection and correction on popular music by leveraging information on long-term musical repetition. I also work on Optical Music Recognition as part of the [SIMSSA project](https://simssa.ca/).
 
 ### Misc.
 
