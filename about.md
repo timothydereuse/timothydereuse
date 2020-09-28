@@ -9,17 +9,17 @@ I'm Tim de Reuse, a PhD candidate in Music Technology at McGill University in Mo
 
 My research interests center around pattern discovery and error detection in symbolic music. For my doctoral project, I'm using machine learning to perform error detection and correction on popular music by leveraging information on long-term musical repetition. I've also worked on Optical Music Recognition as part of the [SIMSSA project](https://simssa.ca/).
 
-### Education
-
-- Bachelor of Arts in Music (University of North Texas, 2010 - 2014)
-- Master of Arts in Music Technology (McGill University, 2016 - 2018)
-- Doctor of Philosophy in Music Technology (McGill University, 2018 - )
-
 ### Misc.
 
 I write regularly for the pop music review site [The Singles Jukebox](http://www.thesinglesjukebox.com/).
 
 I'm a lifelong guitar player. Most of my music is released and performed under the band name Water Gun Water Gun Sky Attack (partial discography on [bandcamp](https://watergunsky.bandcamp.com/) / [spotify](https://open.spotify.com/artist/3KstYJyLtTmsxAPLkkEDt8)). My current project is figuring out how I can delegate this "songwriting" business to an elaborate neural network, which would save me a lot of time.
+
+### Education
+
+- Bachelor of Arts in Mathematics (University of North Texas, 2010 - 2014)
+- Master of Arts in Music Technology (McGill University, 2016 - 2018)
+- Doctor of Philosophy in Music Technology (McGill University, 2018 - )
 
 ### Publications
 
