@@ -41,7 +41,7 @@ So, the runlength representation will have a total length of:
 Relevant parameters:
 
 - `num_dur_vals`: The number of most common duration values to return when collecting statistics. If this is larger than the number of total unique duration values found in the corpus, then some features in the resulting representation will always be 0 (a warning will be displayed if this is the case). For reference, the total number of unique duration values in the Essens and Meertens tune collections is 21.
-- `FLAGS:` Defines the placement of four additional flags at the end of the duration vector. These flags are `eos` (end of sequence), `sos` (start of sequence), `pad` (padding), and `mask` (masked elements).
+- `FLAGS:` Defines the placement of four additional flags at the end of the duration vector. These flags are `eos` (end of sequence), `sos` (start of sequence), `pad` (padding elements), and `mask` (masked elements).
 
 ### Note-Tuple
 The Note-Tuple is a MIDI-like representation of symbolic music, where each note is represented as an ordered 4-tuple of the form `(MIDI pitch, voice, delta from previous event, duration)`.
