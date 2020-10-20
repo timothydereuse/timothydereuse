@@ -1,13 +1,27 @@
 ---
 published: true
 ---
-## (Sept 2020: Bidirectional Transformer)
+## (Sept-Oct 2020: Bidirectional Transformer)
 
-See BERT structure.
+These experiments involve training a bidirectional transformer (similar to the BERT architecture) on an error correction task.
 
-15% masking, 1.5% random:
+Base parameters:
 
-global: pitch_accuracy: 0.9430557725355413 | dur_acc: 0.9374023590064052
-mask: pitch_accuracy: 0.5492163608562691 | dur_acc: 0.7355695718654434
-rand: pitch_accuracy: 0.449678800856531 | dur_acc: 0.630085653104925
+- Sequence Length: 40
+- Num. Layers: 6
+- Num. Attention Heads: 4
+- Hidden Dimension: 256
+- Masked sequence elements: 15%
+- Randomized sequence elements: 1.5%
+
+![attn v duration.png]({{site.baseurl}}/_posts/attn v duration.png)
+
+![attn v pitch.png]({{site.baseurl}}/_posts/attn v pitch.png)
+
+![layers v duration.png]({{site.baseurl}}/_posts/layers v duration.png)
+
+![layers v pitch.png]({{site.baseurl}}/_posts/layers v pitch.png)
+
+
+
 
