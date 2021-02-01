@@ -7,7 +7,7 @@ Previous error-correction tasks on dutch folk song failed to obtain higher accur
 
 A series of less formal experiments were conducted with a synthetic dataset to try to "force" the transformer architecture from the previous experiments to learn repetitive forms. This dataset comprises repeated sequences of randomly chosen notes (one might call them "exceptionally uninspired serialist compositions"). Each sequence is between four and ten repetitions of a sequence of between five and twenty notes, uniformly chosen from a random range. The _only_ way to recognize errors in such a corpus is to first detect the period at which one of these sequences repeats and then note the locations where notes fail to conform to this regularity.
 
-![uninspired_serialist_composition.png]({{site.baseurl}}/_posts/uninspired_serialist_composition.png)
+![uninspired_serialist_composition.png](https://raw.githubusercontent.com/timothydereuse/timothydereuse.github.io/master/_posts/uninspired_serialist_composition.png)
 
 (An example of one of the sequences used in the synthetic repetition dataset.)
 
