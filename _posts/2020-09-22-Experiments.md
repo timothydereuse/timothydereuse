@@ -1,7 +1,7 @@
 ---
 published: true
 ---
-## (Sept-Oct 2020: Bidirectional Transformer)
+## Sept-Oct 2020: Training bidirectional Transformers for error detection
 
 These experiments involve training a bidirectional transformer (similar to the BERT architecture) on an error correction task on monophonic folk tunes: A certain percentage of the number of tokens in each sequence are masked at random positions, and a smaller percentage are set to random values (though only values used elsewhere in the dataset are permitted). The network is then trained to reconstruct the un-corrupted input. Results are given for pitch and duration separately, since the representation used here considers each note's pitch and duration as two separate one-hot vectors.
 
