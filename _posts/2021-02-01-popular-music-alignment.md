@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 ## Jan 2021: Predicting error alignments on popular music
 
@@ -10,4 +10,11 @@ We represent this polyphonic music using the Note-tuple representation [first pr
 - **N** is the note's MIDI pitch,
 - **O** is the interval of time between this note's onset and the onset of the next note in the sequence (measured in 48ths of a beat, rounded to the nearest integer)
 - **D** is the duration of the note (measured as above)
-- **V** is the voice of the note.
+- **V** is a number indicating the voice of the note.
+
+Simultaneous notes are always ordered from lowest to highest pitch, then from lowest to highest duration, then from lowest to highest voice number. This lets us have a single unambiguous way of representing any MIDI file.
+
+Up until now, the [https://pytorch.org/docs/stable/generated/torch.nn.Transformer.html](default pytorch implementations of the Transformer) have been sufficient, but we want now to be able to cover multiple verses of a pop song in one pass through the network, which requires input lengths of hundreds of notes. Since the "Vanilla" transformer's memory requirements are _O(N^2)_ in the sequence length, this is problematic. To speed up the process we switch to using the [https://github.com/lucidrains/linformer](Linformer), a variant of the Transformer that lowers the memory requirement to _O(N)_ in the sequence length by approximating the costly key-query matrix multiplication at the heart of the Vanilla transformer with several multiplications of smaller matrices instead.
+
+To simplify the task somewhat, instead of training the model on error correction, we use error _detection;_ that is, identifying spots in the sequence where something seems wrong. Instead of a corrected sequence of note-tuples, the output of the model is a sequence of binary flags that indicate whether or not an error is present at the given index. Errors are produced in the original music by randomly deleting, inserting, or replacing notes, and the set of binary flags that describes these errors is found using the [https://docs.python.org/3/library/difflib.html]( SequenceMatcher) utility found in python's default difflib module.
+
