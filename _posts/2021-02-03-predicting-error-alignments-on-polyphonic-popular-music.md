@@ -1,7 +1,7 @@
 ---
 published: true
 ---
-**JAN. 2021:** This post details a refinement on the previous model that allows it to handle polyphonic music, the new input/output representations that allow it to function, and some preliminary results.
+**Jan. 2021:** This post details a refinement on the previous model that allows it to handle polyphonic music, the new input/output representations that allow it to function, and some preliminary results.
 
 ## Outline of the New Method
 
