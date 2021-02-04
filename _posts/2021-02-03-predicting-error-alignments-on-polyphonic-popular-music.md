@@ -22,7 +22,7 @@ To simplify the task somewhat, instead of training the model on error correction
 
 This particular representation of errors is necessary because of the use of the bidirectional transformer model, which requires that the output sequence length is exactly the same as the input sequence length. This somewhat retricts how generally we can represent errors, but is suitable as a framework for testing out the model.
 
-![errors_data_flow.PNG]({{site.baseurl}}/_posts/errors_data_flow.PNG)
+![errors_data_flow.PNG](https://raw.githubusercontent.com/timothydereuse/timothydereuse.github.io/master/_posts/errors_data_flow.PNG)
 
 (A flowchart detailing the training process.)
 
