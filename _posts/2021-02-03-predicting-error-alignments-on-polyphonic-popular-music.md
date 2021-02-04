@@ -34,10 +34,10 @@ We test this setup with the following parameters:
 - 128-note segments (worse results were obtained with fewer, no significant change with more)
 - Testing on 20% of the full LPD-Cleansed dataset, with a 10-10-80 Test/Validate/Train split
 
-```
-| -------------------- | Replace Note | Insert Note | Delete Note  |
-| True Positive Rate   | 64.0%        | 0.0%        | 71.4%        |
-| False Positive Rate  | 98.7%        | 99.9%       | 98.6%        |
-```
+
+    | -------------------- | Replace Note | Insert Note | Delete Note  |
+    | True Positive Rate   | 64.0%        | 0.0%        | 71.4%        |
+    | False Positive Rate  | 98.7%        | 99.9%       | 98.6%        |
+
 
 The True Positive Rate, above, may be read as the percentage of notes where this operation was correctly identified - the true negative rate, conversely, is the percentage of notes where this operation was correctly identified as NOT present. The most striking thing, of course, is that this model completely fails to ever detect the necessity of inserting a note that was deleted. Hopefully this behavior can be corrected with a different model architecture.
