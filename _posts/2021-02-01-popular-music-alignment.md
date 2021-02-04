@@ -1,6 +1,8 @@
 ---
 published: true
 ---
+TEST
+
 ## Jan 2021: Predicting error alignments on popular music
 
 The following experiments use musical content from the [Lakh Midi Dataset](https://colinraffel.com/projects/lmd/); specifically, the subset defined as "LPD-cleansed" in the [Lakh Pianoroll Dataset](https://salu133445.github.io/lakh-pianoroll-dataset/dataset). This comprises a database of some 20,000 MIDI files, predominantly containing Western popular music, all in 4/4, with no tempo or time signature changes, where the first downbeat of the song always occurs simultaneously with the first note of the MIDI file. Each file is collapsed down into five channels (as described in the description for the LPD-cleansed-5 dataset in the link above): drums, piano, guitar, bass, and strings.
@@ -17,3 +19,20 @@ Simultaneous notes are always ordered from lowest to highest pitch, then from lo
 Up until now, the [default pytorch implementations of the Transformer](https://pytorch.org/docs/stable/generated/torch.nn.Transformer.html) have been sufficient, but we want now to be able to cover multiple verses of a pop song in one pass through the network, which requires input lengths of hundreds of notes. Since the "Vanilla" transformer's memory requirements are _O(N^2)_ in the sequence length, this is problematic. To speed up the process we switch to using the [Linformer](https://github.com/lucidrains/linformer), a variant of the Transformer that lowers the memory requirement to _O(N)_ in the sequence length by approximating the costly key-query matrix multiplication at the heart of the Vanilla transformer with several multiplications of smaller matrices instead.
 
 To simplify the task somewhat, instead of training the model on error correction, we use error _detection;_ that is, identifying spots in the sequence where something seems wrong. Instead of a corrected sequence of note-tuples, the output of the model is a sequence of binary flags that indicate whether or not an error is present at the given index. Errors are produced in the original music by randomly deleting, inserting, or replacing notes, and the set of binary flags that describes these errors is found using the [SequenceMatcher](https://docs.python.org/3/library/difflib.html) utility found in python's default difflib module.
+
+This particular representation of errors is necessary because of the use of the bidirectional transformer model, which requires that the output sequence length is exactly the same as the input sequence length. This somewhat retricts how generally we can represent errors, but is suitable as a framework for testing out the model.
+
+![errors_data_flow.PNG]({{site.baseurl}}/_posts/errors_data_flow.PNG)
+
+(A flowchart detailing the training process.)
+
+Detailed results show that
+
+
+```
+| -------------------- | Replace Note | Insert Note | Delete Note  |
+| True Positive Rate   | 64.0%        | 0.0%        | 71.4%        |
+| False Positive Rate  | 98.7%        | 99.9%       | 98.6%        |
+```
+
+The True Positive Rate, above, may be read as the percentage of notes where this operation was correctly identified - 
