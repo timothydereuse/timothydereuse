@@ -35,7 +35,8 @@ We test this setup with the following parameters:
 - Testing on 20% of the full LPD-Cleansed dataset, with a 10-10-80 Test/Validate/Train split
 
 
-    | -------------------- | Replace Note | Insert Note | Delete Note  |
+    |                      | Replace Note | Insert Note | Delete Note  |
+    |----------------------|--------------|-------------|--------------|
     | True Positive Rate   | 64.0%        | 0.0%        | 71.4%        |
     | False Positive Rate  | 98.7%        | 99.9%       | 98.6%        |
 
