@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 ## Testing the LSTUT on more sequences
 
@@ -43,7 +43,16 @@ The sawtooth sequence here serves as a control, as it should be trivially easy t
 
 The below image shows an example run of the default parameters outlined above, on both the sawtooth and periodic random sequences. The top plot shows the sequence that was fed into the network, and the bottom image shows the positions where the sequence was edited to have errors (on top) and the raw output of the network trying to predict those positions (just underneath).
 
+### Example for Sawtooth Sequence
+
 ![sawtooth_default](https://raw.githubusercontent.com/timothydereuse/timothydereuse.github.io/master/_posts/FINAL_2_LSTUT_ODDSEQS_0_(2021.04.28.22.39)_4-1-3-2-5-128-128.png)
+
+### Example for Periodic Random Sequence
 
 ![randseq_default](https://raw.githubusercontent.com/timothydereuse/timothydereuse.github.io/master/_posts/FINAL_2_LSTUT_RANDSEQS_0_(2021.05.05.15.45)_2-1-3-2-5-128-128.png)
 
+## Results
+
+Here is a table detailing the performance (F1 Values) of the network architecture under a variety of modifications to the variables defined above.
+
+![lstut testing table](https://raw.githubusercontent.com/timothydereuse/timothydereuse.github.io/master/_posts/results_table_lstut_testing.png)
