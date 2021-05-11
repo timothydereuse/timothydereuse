@@ -3,7 +3,9 @@ published: true
 ---
 ## Testing the LSTUT on more sequences
 
-Previously, I tested a bidirectional transformer network on a [series of experiments](https://timothydereuse.github.io/predicting-error-alignments-on-polyphonic-popular-music/) wherein the goal was to detect "errors" introduced into symbolic music. These experiments were trying to identify each possible type of error (insertion, deletion, replacement) separately, and this turned out to be quite a lot of trouble (I spent a good month or two chasing ideas that went nowhere, trying to find an error detection method that worked to perfectly locate and describe the nature of the error when detecting it). Here I am using a simpler approach, where I seek to answer a binary question at each point in the input sequence: is there some error here, of any kind? Additionally, I am using the [Long-Short Term Universal Transformer network](https://boblsturm.github.io/aimusic2020/papers/CSMC__MuMe_2020_paper_46.pdf) architecture which has shown promise for detecting long-term dependencies in musical data. Other than these two changes the setup for this experiment is the same as the previous one (including the use of Notetuple format for input data.).
+*March-April 2021* Previously, I tested a bidirectional transformer network on a [series of experiments](https://timothydereuse.github.io/predicting-error-alignments-on-polyphonic-popular-music/) wherein the goal was to detect "errors" introduced into symbolic music. These experiments were trying to identify each possible type of error (insertion, deletion, replacement) separately, and this turned out to be quite a lot of trouble (I spent a good month or two chasing ideas that went nowhere, trying to find an error detection method that worked to perfectly locate and describe the nature of the error when detecting it). Here I am using a simpler approach, where I seek to answer a binary question for each point in the input sequence: is there some error here, of any kind?
+
+Additionally, I am using the [Long-Short Term Universal Transformer network](https://boblsturm.github.io/aimusic2020/papers/CSMC__MuMe_2020_paper_46.pdf) architecture which has shown promise for detecting long-term dependencies in musical data. Other than these two changes the setup for this experiment is the same as the previous one (including the use of Notetuple format for input data, though we are not using real music).
 
 ### Fixed variables
 
@@ -31,7 +33,7 @@ The only things that change through these experiments are the nature of the sequ
 
 There are two types of sequences: a Sawtooth Sequence and a Periodic Random sequence
 
-The sawtooth sequence is a sawtooth wave with a range of [0, 1] and a random exponent in (1/5, 5) applied to it. It has a mean period of `1/4 * sequence length` and a fixed starting phase. The Periodic Random sequence is a random sequence of values in [0, 1] that repeats with mean period `1/4 * sequence length`. 
+The sawtooth sequence is a sawtooth wave with a range of [0, 1] and a random exponent in (1/5, 5) applied to it. It has a mean period of `1/4 * sequence length` and a fixed starting phase. The Periodic Random sequence is a random sequence of values in [0, 1] that repeats with mean period `1/4 * sequence length`. To match the note-tuple format, we concatenate these periodic one-dimensional sequences together into feature vectors; that is, each input to the network is a sequence of tuples: `(sequence1[0], sequence2[0], sequence3[0], sequence4[0]), (sequence1[1], sequence2[1], sequence3[1], sequence4[1]),...`.
 
 The errors applied to these sequences are, by default:
 
@@ -53,6 +55,10 @@ The below image shows an example run of the default parameters outlined above, o
 
 ## Results
 
-Here is a table detailing the performance (F1 Values) of the network architecture under a variety of modifications to the variables defined above.
+Here is a table detailing the performance (F1 Values) of the network architecture under a variety of modifications to the variables defined above. Blank entries correspond to parameter tweaks that are not relevant to the random periodic sequence (For example, phase variance doesn't much matter when there is no reasonable interpretation of where the period 'starts').
 
 ![lstut testing table](https://raw.githubusercontent.com/timothydereuse/timothydereuse.github.io/master/_posts/results_table_lstut_testing.png)
+
+Given that these are sequences of length 256, and only between 5 and 25 sequence positions are considered to be errors on any given run, random guessing would result in accuracies of < 10% in every case, so the model is learning something. As expected, it performs much better on the sawtooth sequences, where it does not need to learn from long-term dependencies, but it is able to do significantly better than chance on the periodic random sequences as well.
+
+That it does _better_ when more sequence entries are deleted for both the random and sawtooth sequences is curious. I expect this is just a result of having more examples to learn from, given the limited number of training epochs and small amount of training data used in each run. I suspect, from these results, that training separate networks to detect different types of errors might be the way to proceed when scaling this to real music. 
