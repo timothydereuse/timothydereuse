@@ -1,9 +1,7 @@
 ---
 published: true
 ---
-## Testing the LSTUT on more sequences
-
-*March-April 2021* Previously, I tested a bidirectional transformer network on a [series of experiments](https://timothydereuse.github.io/predicting-error-alignments-on-polyphonic-popular-music/) wherein the goal was to detect "errors" introduced into symbolic music. These experiments were trying to identify each possible type of error (insertion, deletion, replacement) separately, and this turned out to be quite a lot of trouble (I spent a good month or two chasing ideas that went nowhere, trying to find an error detection method that worked to perfectly locate and describe the nature of the error when detecting it). Here I am using a simpler approach, where I seek to answer a binary question for each point in the input sequence: is there some error here, of any kind?
+*March-April 2021: * Previously, I tested a bidirectional transformer network on a [series of experiments](https://timothydereuse.github.io/predicting-error-alignments-on-polyphonic-popular-music/) wherein the goal was to detect "errors" introduced into symbolic music. These experiments were trying to identify each possible type of error (insertion, deletion, replacement) separately, and this turned out to be quite a lot of trouble (I spent a good month or two chasing ideas that went nowhere, trying to find an error detection method that worked to perfectly locate and describe the nature of the error when detecting it). Here I am using a simpler approach, where I seek to answer a binary question for each point in the input sequence: is there some error here, of any kind?
 
 Additionally, I am using the [Long-Short Term Universal Transformer network](https://boblsturm.github.io/aimusic2020/papers/CSMC__MuMe_2020_paper_46.pdf) architecture which has shown promise for detecting long-term dependencies in musical data. Other than these two changes the setup for this experiment is the same as the previous one (including the use of Notetuple format for input data, though we are not using real music).
 
